@@ -8,13 +8,14 @@ app = Flask(__name__)
 client = MongoClient(config.MONGO_URL)
 db = client[config.DB_NAME]
 
-@app.route('/health', meathonds=["GET"])
+@app.route('/health', methods=["GET"])
 def health_check():
     return jsonify({
         "status": "OK",
         "message": "Task manager API running!"
     })
 
+@app.route('/db_test', methods=["GET"])
 def db_test():
     try:
         db.command("ping") #check DB connection
